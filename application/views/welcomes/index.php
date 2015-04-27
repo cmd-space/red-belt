@@ -28,8 +28,8 @@
 			<p>*Password should be at least 8 characters</p>
 			<p><label for="confirm_password">Confirm PW: </label>
 			<input type="password" name='confirm_password'></p>
-			<p><label for="birth">Date of Birth: </label>
-			<input type="date" name="birth"></p>
+			<p><label for="birth">Date of Birth (MM/DD/YYYY): </label>
+			<input type="text" name="birth"></p>
 			<input type="hidden" name="register" value="yes">
 			<input type="submit" value="Register">
 		</form>

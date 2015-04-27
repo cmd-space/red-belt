@@ -14,3 +14,12 @@
 .errors {
 	color: red;
 }
+.logout {
+	padding-left: 70%;
+}
+.t-head {
+	background-color: grey;
+}
+table {
+	border-collapse: collapse;
+}

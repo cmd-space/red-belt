@@ -9,7 +9,7 @@ class Welcomes extends CI_Controller {
   public function validate() {
   	$this->load->library('form_validation');
   	if($this->input->post('register') === 'yes') {
-  		$this->form_validation->set_rules('name', 'Name', 'trim|required|alpha');
+  		$this->form_validation->set_rules('name', 'Name', 'trim|required');
 	  	$this->form_validation->set_rules('alias', 'Alias', 'trim|required');
 	  	$this->form_validation->set_rules('email', 'Email', 'trim|required|is_unique[users.email]|valid_email');
 	  	$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[8]');
@@ -39,7 +39,31 @@ class Welcomes extends CI_Controller {
   }
 
   public function register() {
+  	$this->output->enable_profiler(TRUE);
+  	$this->load->model('Welcome');
+  	$user = $this->session->flashdata('user');
+  	$this->Welcome->create($user);
+  	$this->session->set_userdata('user', $this->Welcome->user_by_email($user));
+  	redirect('/welcomes/friends');
+  }
 
+  public function login() {
+  	$this->output->enable_profiler(TRUE);
+  	$this->load->model('Welcome');
+  	$user = $this->session->flashdata('user');
+  	if($this->Welcome->user_by_email($user)) {
+  		$this->session->set_userdata('user', $this->Welcome->user_by_email($user));
+  		redirect('/welcomes/friends');
+  	} else {
+  		$this->session->set_flashdata('login_errors', array('error' => 'Email and/or Password do not match our records'));
+  		redirect('/');
+  	}
+  }
+
+  public function friends() {
+  	$this->output->enable_profiler(TRUE);
+  	$user = $this->session->userdata('user');
+  	$this->load->view('friends', $user);
   }
 }
 
