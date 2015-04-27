@@ -62,8 +62,35 @@ class Welcomes extends CI_Controller {
 
   public function friends() {
   	$this->output->enable_profiler(TRUE);
+  	$this->load->model('Welcome');
   	$user = $this->session->userdata('user');
+  	$this->Welcome->friends($user['id']);
+  	$user['friends'] = $this->Welcome->friends($user['id']);
+  	$this->Welcome->not_friends($user['id']);
+  	$user['not_friends'] = $this->Welcome->not_friends($user['id']);
+  	var_dump($user);
+  	die();
   	$this->load->view('friends', $user);
+  }
+
+  public function add_friend($id) {
+  	$this->output->enable_profiler(TRUE);
+  	$this->load->model('Welcome');
+  	$this->Welcome->add_friend($id);
+  	redirect('/welcomes/friends');
+  }
+
+  public function user($id) {
+  	$this->output->enable_profiler(TRUE);
+  	$this->load->model('Welcome');
+  	$this->Welcome->get_by_id($id);
+  	$user = $this->Welcome->get_by_id($id);
+  	$this->load->view('user', $user);
+  }
+
+  public function destroy() {
+  	$this->session->sess_destroy();
+  	redirect('/');
   }
 }
 

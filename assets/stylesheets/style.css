@@ -17,9 +17,24 @@
 .logout {
 	padding-left: 70%;
 }
+#user-anchor {
+	list-style-type: none;
+}
+#user-anchor li {
+	display: inline;
+	margin-left: .5em;
+}
 .t-head {
 	background-color: grey;
 }
 table {
 	border-collapse: collapse;
+}
+table tr td {
+	padding: .5em .5em;
+	border-right: 1px solid black;
+}
+.button {
+	text-decoration: none;
+	color: black;
 }

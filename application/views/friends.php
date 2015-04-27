@@ -15,6 +15,13 @@
 				<td>Alias</td>
 				<td>Action</td>
 			</tr>
+<?php
+	if(!empty($friends)) {
+		foreach($friends as $friend) {
+			
+		}
+	}
+?>
 		</table>
 	</div>
 	<h3>Other Users not on your friend's list:</h3>
@@ -24,6 +31,13 @@
 				<td>Alias</td>
 				<td>Action</td>
 			</tr>
+<?php
+	if(!empty($not_friends)) {
+		foreach($not_friends as $not) {
+			echo '<tr><td><a href="/welcomes/user/'.$not['id'].'">'.$not['alias'].'</a></td><td><button><a href="/welcomes/add_friend/'.$not['id'].'" class="button">Add as Friend</a></button></td></tr>';
+		}
+	}
+?>
 		</table>
 	</div>
 </body>
