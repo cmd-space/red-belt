@@ -1,0 +1,16 @@
+#register {
+	border: 1px solid black;
+	width: 20em;
+	display: inline-block;
+	padding-left: 1em;
+}
+#login {
+	border: 1px solid black;
+	width: 20em;
+	display: inline-block;
+	padding-left: 1em;
+	vertical-align: top;
+}
+.errors {
+	color: red;
+}
