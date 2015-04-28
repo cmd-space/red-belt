@@ -17,8 +17,14 @@
 			</tr>
 <?php
 	if(!empty($friends)) {
+		// $friend_array = array();
 		foreach($friends as $friend) {
-			
+			if($friend['friend_alias'] !== $alias) {
+				echo '<tr><td>'.$friend['friend_alias'].'</a></td><td><a href="/welcomes/user/'.$friend['friend_id'].'">View Profile</a><a href="/welcomes/remove_friend/'.$friend['friend_id'].'" class="remove">Remove as Friend</a></td></tr>';
+			} 
+			// else {
+			// 	echo '<tr><td>'.$friend['alias'].'</a></td><td><a href="/welcomes/user/'.$friend['id'].'">View Profile</a><a href="/welcomes/remove_friend/'.$friend['id'].'" class="remove">Remove as Friend</a></td></tr>';
+			// }
 		}
 	}
 ?>
@@ -34,9 +40,13 @@
 <?php
 	if(!empty($not_friends)) {
 		foreach($not_friends as $not) {
-			echo '<tr><td><a href="/welcomes/user/'.$not['id'].'">'.$not['alias'].'</a></td><td><button><a href="/welcomes/add_friend/'.$not['id'].'" class="button">Add as Friend</a></button></td></tr>';
-		}
-	}
+			// foreach($friends as $friend) {
+			// 	if($not['id'] === $friend['friend_id'] || $not['id'] === $friend['id']) {
+					echo '<tr><td><a href="/welcomes/user/'.$not['id'].'">'.$not['alias'].'</a></td><td><button><a href="/welcomes/add_friend/'.$not['id'].'" class="button">Add as Friend</a></button></td></tr>';
+				}
+			}
+		// }
+	// }
 ?>
 		</table>
 	</div>

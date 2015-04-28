@@ -68,8 +68,13 @@ class Welcomes extends CI_Controller {
   	$user['friends'] = $this->Welcome->friends($user['id']);
   	$this->Welcome->not_friends($user['id']);
   	$user['not_friends'] = $this->Welcome->not_friends($user['id']);
-  	var_dump($user);
-  	die();
+  	// foreach($user['friends'] as $friend) {
+  	// 	if($friend['id'] === $user['id']) {
+  			
+  	// 	}
+  	// }
+  	// var_dump($user);
+  	// die();
   	$this->load->view('friends', $user);
   }
 
@@ -86,6 +91,13 @@ class Welcomes extends CI_Controller {
   	$this->Welcome->get_by_id($id);
   	$user = $this->Welcome->get_by_id($id);
   	$this->load->view('user', $user);
+  }
+
+  public function remove_friend($id) {
+  	$this->output->enable_profiler(TRUE);
+  	$this->load->model('Welcome');
+  	$this->Welcome->remove_friend($id);
+  	redirect('/welcomes/friends');
   }
 
   public function destroy() {

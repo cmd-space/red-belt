@@ -38,3 +38,6 @@ table tr td {
 	text-decoration: none;
 	color: black;
 }
+.remove {
+	margin-left: .5em;
+}

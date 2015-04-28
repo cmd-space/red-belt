@@ -14,9 +14,11 @@ class Welcome extends CI_Model {
   }
 
   public function friends($id) {
-  	return $this->db->query("SELECT user2.alias as friend_alias, users.alias FROM users	
+  	$id2 = array($id, $id);
+  	return $this->db->query("SELECT user2.alias as friend_alias, user2.id as friend_id, users.alias, users.id FROM users	
   							 JOIN friends ON users.id = friends.user_id
-  							 JOIN users AS user2 ON friends.friend_id = user2.id")->result_array();
+  							 JOIN users AS user2 ON friends.friend_id = user2.id
+  							 WHERE users.id = ?", $id2)->result_array();
   }
 
   public function get_by_id($id) {
@@ -24,10 +26,10 @@ class Welcome extends CI_Model {
   }
 
   public function not_friends($id) {
-  	$id2 = array($id, $id);
+  	$id2 = array($id, $id, $id);
   	return $this->db->query("SELECT * FROM users WHERE users.id NOT IN (
   			  SELECT friend_id FROM friends WHERE user_id = ?
-  			  ) AND users.id != ?", $id2)->result_array();
+  			  ) AND users.id NOT IN (SELECT user_id FROM friends WHERE user_id = ?) AND users.id != ?", $id2)->result_array();
   }
 
   public function add_friend($id) {
@@ -36,5 +38,11 @@ class Welcome extends CI_Model {
   	// die();
   	return $this->db->query("INSERT INTO friends (user_id, friend_id) 
   							 VALUES ((SELECT id FROM users WHERE id = ?), ?)", $values);
+  }
+
+  public function remove_friend($id) {
+  	$values = array($this->session->userdata('user')['id'], $id);
+  	$query = "DELETE FROM friends WHERE user_id = ? AND friend_id = ?";
+  	return $this->db->query($query, $values);
   }
 }
